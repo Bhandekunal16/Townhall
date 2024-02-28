@@ -11,14 +11,19 @@ class Authorized {
    * @param {string} params - ifsc code for the bank details
    * @return {object} - return bank address details
    * */
-  main(params) {
+  main(params, port) {
     return axios
       .get(`${env.api}${params}`)
       .then((response) => {
-        return response.data;
+        return {
+          data: response.data,
+          status: true,
+          statusCode: 200,
+          receiver: port,
+        };
       })
       .catch((error) => {
-        console.error("Error:", error);
+        return { res: error, status: false, statusCode: 500, error: "error" };
       });
   }
 
@@ -40,4 +45,3 @@ class Authorized {
 }
 
 module.exports = Authorized;
-
