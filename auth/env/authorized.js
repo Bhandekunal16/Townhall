@@ -2,7 +2,15 @@ const axios = require("axios");
 const Environment = require("./environment");
 const env = new Environment();
 
+/**
+ * @class - authorized class for authorization api endpoint.
+ */
 class Authorized {
+  /**
+   * @function - ifsc code detecting api's
+   * @param {string} params - ifsc code for the bank details
+   * @return {object} - return bank address details
+   * */
   main(params) {
     return axios
       .get(`${env.api}${params}`)
@@ -14,6 +22,11 @@ class Authorized {
       });
   }
 
+  /**
+   * @function - postal code detecting api's.
+   * @param {string} params - postal code for the address verification.
+   * @return {object} - return address details.
+   * */
   postal(params) {
     return axios
       .get(`${env.locationApi}${params}`)
@@ -27,3 +40,4 @@ class Authorized {
 }
 
 module.exports = Authorized;
+
