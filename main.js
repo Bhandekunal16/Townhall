@@ -74,7 +74,7 @@ app.post("/random", async (req, res) => {
 });
 
 app.post("/ifsc", async (req, res) => {
-  const query = await authorized.main(req.body.ifsc, req.headers["host"]);
+  const query = await authorized.main(req.body.ifsc);
   await res.status(200).send(query);
 });
 

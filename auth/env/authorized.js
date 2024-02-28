@@ -11,7 +11,7 @@ class Authorized {
    * @param {string} params - ifsc code for the bank details
    * @return {object} - return bank address details
    * */
-  main(params, port) {
+  main(params) {
     return axios
       .get(`${env.api}${params}`)
       .then((response) => {
@@ -19,7 +19,6 @@ class Authorized {
           data: response.data,
           status: true,
           statusCode: 200,
-          receiver: port,
         };
       })
       .catch((error) => {
