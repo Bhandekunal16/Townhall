@@ -83,6 +83,7 @@ app.post("/pincode", async (req, res) => {
   await res.status(200).send(query);
 });
 
+
 const routes = [
   OtpCrater,
   Uuid,
