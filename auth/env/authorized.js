@@ -107,6 +107,18 @@ class Authorized {
       error;
     }
   }
+
+  async getPackageInfo(packageName) {
+    try {
+      const response = await axios.get(
+        `https://registry.npmjs.org/${packageName}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching package details:", error);
+      return null;
+    }
+  }
 }
 
 module.exports = Authorized;

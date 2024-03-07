@@ -83,6 +83,16 @@ app.post("/pincode", async (req, res) => {
   await res.status(200).send(query);
 });
 
+app.post("/info", async (req, res) => {
+  const query = await authorized
+    .getPackageInfo(req.body.name)
+    .then((packageInfo) => {
+      if (packageInfo) {
+        return packageInfo;
+      }
+    });
+  await res.status(200).send(query);
+});
 
 const routes = [
   OtpCrater,
