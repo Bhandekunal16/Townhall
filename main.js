@@ -112,14 +112,17 @@ app.post("/search", async (req, res) => {
   res.status(200).send(query);
 });
 
-app.get("/npm/view", async (req, res) => {
-  const query = await authorized.NpmView();
+app.post("/npm/view", async (req, res) => {
+  const query = await authorized.NpmView(
+    req.body.userName,
+    req.body.packageName
+  );
   res.status(200).send(query);
 });
 
 app.post("/v2/npm/view", async (req, res) => {
   const query = await authorized.NpmViewV2(req.body.name);
-  res.status(200).send(query.data);
+  res.status(200).send(query);
 });
 
 const routes = [

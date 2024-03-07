@@ -122,25 +122,48 @@ class Authorized {
 
   async NpmSearch(name) {
     try {
-      console.log(" iam hitting");
       const response = await axios.get(
         `https://api.npms.io/v2/package/${name}`
       );
       console.log(response);
-      return response.data;
+      return response.data
+        ? {
+            data: response.data,
+            status: true,
+            statusCode: 200,
+            msg: `Data found for ${name}`,
+          }
+        : {
+            data: null,
+            status: false,
+            statusCode: 404,
+            msg: `not found for ${name}`,
+          };
     } catch (error) {
-      return error;
+      return { res: error, status: false, statusCode: 500, msg: "error" };
     }
   }
 
-  async NpmView() {
+  async NpmView(userName, packageName) {
     try {
       const response = await axios.get(
-        `https://npm-trends-proxy.uidotdev.workers.dev/github/repos/Bhandekunal16/Robotic.js`
+        `https://npm-trends-proxy.uidotdev.workers.dev/github/repos/${userName}/${packageName}`
       );
-      return response.data;
+      return response.data.name !== undefined
+        ? {
+            data: response.data,
+            status: true,
+            statusCode: 200,
+            msg: `Data found ${packageName};`,
+          }
+        : {
+            data: null,
+            status: false,
+            statusCode: 404,
+            msg: `Data not found ${packageName};`,
+          };
     } catch (error) {
-      return error;
+      return { res: error, status: false, statusCode: 500, msg: "error" };
     }
   }
 
@@ -149,9 +172,21 @@ class Authorized {
       const response = await axios.get(
         `https://npm-trends-proxy.uidotdev.workers.dev/npm/registry/${name}`
       );
-      return response;
+      return response.data.name !== undefined
+        ? {
+            data: response.data,
+            status: true,
+            statusCode: 200,
+            msg: `Data found ${name};`,
+          }
+        : {
+            data: null,
+            status: false,
+            statusCode: 404,
+            msg: `Data not found ${name};`,
+          };
     } catch (error) {
-      return error;
+      return { res: error, status: false, statusCode: 500, msg: "error" };
     }
   }
 }
