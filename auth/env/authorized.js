@@ -119,6 +119,41 @@ class Authorized {
       return null;
     }
   }
+
+  async NpmSearch(name) {
+    try {
+      console.log(" iam hitting");
+      const response = await axios.get(
+        `https://api.npms.io/v2/package/${name}`
+      );
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async NpmView() {
+    try {
+      const response = await axios.get(
+        `https://npm-trends-proxy.uidotdev.workers.dev/github/repos/Bhandekunal16/Robotic.js`
+      );
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async NpmViewV2(name) {
+    try {
+      const response = await axios.get(
+        `https://npm-trends-proxy.uidotdev.workers.dev/npm/registry/${name}`
+      );
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 module.exports = Authorized;

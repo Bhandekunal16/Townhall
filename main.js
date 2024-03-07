@@ -91,7 +91,35 @@ app.post("/info", async (req, res) => {
         return packageInfo;
       }
     });
-  await res.status(200).send(query);
+  const ans = query
+    ? {
+        data: query,
+        status: true,
+        statusCode: 200,
+        msg: `successfully fund data : ${req.body.name}`,
+      }
+    : {
+        data: null,
+        status: false,
+        statusCode: 404,
+        msg: `not fund data : ${res.body.name}`,
+      };
+  await res.status(200).send(ans);
+});
+
+app.post("/search", async (req, res) => {
+  const query = await authorized.NpmSearch(req.body.name);
+  res.status(200).send(query);
+});
+
+app.get("/npm/view", async (req, res) => {
+  const query = await authorized.NpmView();
+  res.status(200).send(query);
+});
+
+app.post("/v2/npm/view", async (req, res) => {
+  const query = await authorized.NpmViewV2(req.body.name);
+  res.status(200).send(query.data);
 });
 
 const routes = [
