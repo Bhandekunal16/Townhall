@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const Color = require("robotic.js/interface/color");
 const Logger = require("robotic.js/interface/Logger");
@@ -12,6 +13,7 @@ const Authorized = require("./auth/env/authorized");
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 const port = 3004;
 
 const otp = new OtpCrater();
