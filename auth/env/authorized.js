@@ -108,6 +108,11 @@ class Authorized {
     }
   }
 
+  /**
+   * @function  getPackageInfo return package info
+   * @param {string} packageName - name of the package
+   * @returns {object} -package information.
+   * */
   async getPackageInfo(packageName) {
     try {
       const response = await axios.get(
@@ -120,6 +125,11 @@ class Authorized {
     }
   }
 
+  /**
+   * @function  NpmSearch return package info
+   * @param {string} name - name of the package
+   * @returns {object} -package information.
+   * */
   async NpmSearch(name) {
     try {
       const response = await axios.get(
@@ -144,6 +154,12 @@ class Authorized {
     }
   }
 
+  /**
+   * @function  NpmView return package info
+   * @param {string} userName - user name of the npm
+   * @param {string} packageName - package Name of the npm
+   * @returns {object} -package information.
+   * */
   async NpmView(userName, packageName) {
     try {
       const response = await axios.get(
@@ -167,6 +183,11 @@ class Authorized {
     }
   }
 
+  /**
+   * @function  NpmView return package info
+   * @param {string} name - user name of the npm package
+   * @returns {object} -package information.
+   * */
   async NpmViewV2(name) {
     try {
       const response = await axios.get(
