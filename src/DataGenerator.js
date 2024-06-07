@@ -1,4 +1,4 @@
-const TypeChecker = require('robotic.js/class/TypeChecker');
+const TypeChecker = require('robotic.js/src/class/TypeChecker');
 
 /**
  * @type {TypeChecker}
