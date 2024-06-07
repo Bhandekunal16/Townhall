@@ -4,11 +4,6 @@ const env = new Environment();
 const ExcelJS = require("exceljs");
 
 class Authorized {
-  /**
-   * @function - ifsc code detecting api's
-   * @param {string} params - ifsc code for the bank details
-   * @return {object} - return bank address details
-   * */
   main(params) {
     return axios
       .get(`${env.api}${params}`)
@@ -24,11 +19,6 @@ class Authorized {
       });
   }
 
-  /**
-   * @function - postal code detecting api's.
-   * @param {string} params - postal code for the address verification.
-   * @return {object} - return address details.
-   * */
   postal(params) {
     return axios
       .get(`${env.locationApi}${params}`)
@@ -40,12 +30,6 @@ class Authorized {
       });
   }
 
-  /**
-   * @function - create excel file with array.
-   * @param {Array<object>} dataArray - array of the any data.
-   * @param {string} filePath - path to excel file.
-   * @return {string} - return file details.
-   * */
   async createExcelFile(dataArray, filePath) {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Data");
@@ -60,11 +44,6 @@ class Authorized {
     await workbook.xlsx.writeFile(filePath);
   }
 
-  /**
-   * @function - return address file against file of the pinCode
-   * @param {string} output -path for the output file
-   * @param {string} filePath- path for the input file
-   * @returns -file with in address data. */
   async readExcelToArray(filePath, output) {
     const workbook = new ExcelJS.Workbook();
     const dataArray = [];
@@ -105,11 +84,6 @@ class Authorized {
     }
   }
 
-  /**
-   * @function  getPackageInfo return package info
-   * @param {string} packageName - name of the package
-   * @returns {object} -package information.
-   * */
   async getPackageInfo(packageName) {
     try {
       const response = await axios.get(
@@ -122,11 +96,6 @@ class Authorized {
     }
   }
 
-  /**
-   * @function  NpmSearch return package info
-   * @param {string} name - name of the package
-   * @returns {object} -package information.
-   * */
   async NpmSearch(name) {
     try {
       const response = await axios.get(
@@ -151,12 +120,6 @@ class Authorized {
     }
   }
 
-  /**
-   * @function  NpmView return package info
-   * @param {string} userName - user name of the npm
-   * @param {string} packageName - package Name of the npm
-   * @returns {object} -package information.
-   * */
   async NpmView(userName, packageName) {
     try {
       const response = await axios.get(
@@ -180,11 +143,6 @@ class Authorized {
     }
   }
 
-  /**
-   * @function  NpmView return package info
-   * @param {string} name - user name of the npm package
-   * @returns {object} -package information.
-   * */
   async NpmViewV2(name) {
     try {
       const response = await axios.get(
