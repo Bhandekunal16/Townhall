@@ -1,15 +1,30 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const Color = require("robotic.js/src/interface/color");
-const Logger = require("robotic.js/src/interface/Logger");
-const OtpCrater = require("./src/otp");
-const Uuid = require("./src/uuid");
-const SortService = require("./src/stringSort");
-const BinaryLocker = require("./src/binaryEncrypted");
-const DataGenerator = require("./src/DataGenerator");
-const Node = require("./module/index");
-const Authorized = require("./auth/env/authorized");
+const [
+  express,
+  cors,
+  bodyParser,
+  Color,
+  Logger,
+  OtpCrater,
+  Uuid,
+  SortService,
+  BinaryLocker,
+  DataGenerator,
+  Node,
+  Authorized,
+] = [
+  require("express"),
+  require("cors"),
+  require("body-parser"),
+  require("robotic.js/src/interface/color"),
+  require("robotic.js/src/interface/Logger"),
+  require("./src/otp"),
+  require("./src/uuid"),
+  require("./src/stringSort"),
+  require("./src/binaryEncrypted"),
+  require("./src/DataGenerator"),
+  require("./module/index"),
+  require("./auth/env/authorized"),
+];
 
 const app = express();
 app.use(bodyParser.json());
@@ -61,10 +76,7 @@ app.post("/store", async (req, res) => {
 });
 
 app.post("/random", async (req, res) => {
-  const query = new DataGenerator().create(
-    req.body.length,
-    req.body.type
-  );
+  const query = new DataGenerator().create(req.body.length, req.body.type);
   res.status(200).send(query);
 });
 
