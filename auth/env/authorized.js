@@ -1,6 +1,8 @@
-const axios = require("axios");
-const Environment = require("./environment");
-const ExcelJS = require("exceljs");
+const [axios, Environment, ExcelJS] = [
+  require("axios"),
+  require("./environment"),
+  require("exceljs"),
+];
 
 class Authorized {
   main(params) {
