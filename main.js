@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 app.use(cors());
 const port = 3004;
 
-const otp = new OtpCrater();
 const uuid = new Uuid();
 const sort = new SortService();
 const data = new DataGenerator();
@@ -36,7 +35,7 @@ app.get("/create/account", async (req, res) => {
 });
 
 app.get("/create/otp", async (req, res) => {
-  const query = await otp.otpCreate();
+  const query = await new OtpCrater().otpCreate();
   res.status(200).send(query);
 });
 
