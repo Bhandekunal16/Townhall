@@ -142,7 +142,7 @@ const elements1 = node.output();
 
 imports = [...imports, ...elements1];
 
-app.listen(port, async () => {
+app.listen(port, () => {
   new Logger().log("***************");
   new Logger().new(imports);
   new Logger().log(
