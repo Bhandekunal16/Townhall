@@ -145,9 +145,11 @@ const elements1 = node.output();
 imports = [...imports, ...elements1];
 
 app.listen(port, async () => {
-  logger.log("***************");
-  logger.new(imports);
-  logger.log(`Node app is successfully created on http://localhost: ${port}.`);
-  logger.log("***************");
+  new Logger().log("***************");
+  new Logger().new(imports);
+  new Logger().log(
+    `Node app is successfully created on http://localhost: ${port}.`
+  );
+  new Logger().log("***************");
   node.getUserInput();
 });
