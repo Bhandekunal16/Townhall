@@ -3,9 +3,6 @@ const Environment = require("./environment");
 const env = new Environment();
 const ExcelJS = require("exceljs");
 
-/**
- * @class - authorized class for authorization api endpoint.
- */
 class Authorized {
   /**
    * @function - ifsc code detecting api's
