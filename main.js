@@ -18,7 +18,7 @@ const [
   require("robotic.js/src/interface/color"),
   require("robotic.js/src/interface/Logger"),
   require("./src/otp"),
-  require("./src/uuid"),
+  require("robotic.js/src/class/uuid"),
   require("./src/stringSort"),
   require("./src/binaryEncrypted"),
   require("./src/DataGenerator"),
@@ -30,7 +30,6 @@ const app = express();
 const port = 3004;
 app.use(bodyParser.json());
 app.use(cors());
-
 
 app.get("/", async (req, res) => {
   const query = "hello world";
@@ -49,7 +48,7 @@ app.get("/create/otp", async (req, res) => {
 });
 
 app.get("/create/uuid", async (req, res) => {
-  const query = new Uuid().generateUUID();
+  const query = new Uuid().vectorized();
   res.status(200).send(query);
 });
 
