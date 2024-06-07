@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 app.use(cors());
 const port = 3004;
 
-const uuid = new Uuid();
 const sort = new SortService();
 const data = new DataGenerator();
 const locker = new BinaryLocker();
@@ -40,7 +39,7 @@ app.get("/create/otp", async (req, res) => {
 });
 
 app.get("/create/uuid", async (req, res) => {
-  const query = await uuid.generateUUID();
+  const query = await new Uuid().generateUUID();
   res.status(200).send(query);
 });
 
