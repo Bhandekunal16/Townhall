@@ -45,7 +45,7 @@ app.get("/create/uuid", async (req, res) => {
 
 app.post("/sort/string", async (req, res) => {
   const requestData = req.body;
-  const query = await sort.write(
+  const query = await new SortService().write(
     requestData.data,
     Object.getOwnPropertyNames(requestData)
   );
@@ -57,17 +57,20 @@ app.post("/sort/string", async (req, res) => {
 app.post("/store", async (req, res) => {
   const requestData = req.body;
   const header = req.hostname;
-  const query = await locker.createBinaryFile(
+  const query = new BinaryLocker().createBinaryFile(
     requestData.data,
     requestData.name,
     header
   );
 
-  await res.status(200).send({ data: query, msg: "success", status: true });
+  res.status(200).send({ data: query, msg: "success", status: true });
 });
 
 app.post("/random", async (req, res) => {
-  const query = await data.create(req.body.length, req.body.type);
+  const query = await new DataGenerator().create(
+    req.body.length,
+    req.body.type
+  );
   await res.status(200).send(query);
 });
 
