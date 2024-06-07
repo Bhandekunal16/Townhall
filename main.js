@@ -22,7 +22,7 @@ const [
   require("./src/stringSort"),
   require("./src/binaryEncrypted"),
   require("./src/DataGenerator"),
-  require("./module/index"),
+  require("robotic.js/src/module/index"),
   require("./auth/env/authorized"),
 ];
 
