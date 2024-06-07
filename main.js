@@ -28,12 +28,12 @@ app.get("/create/account", async (req, res) => {
 });
 
 app.get("/create/otp", async (req, res) => {
-  const query = await new OtpCrater().otpCreate();
+  const query = new OtpCrater().otpCreate();
   res.status(200).send(query);
 });
 
 app.get("/create/uuid", async (req, res) => {
-  const query = await new Uuid().generateUUID();
+  const query = new Uuid().generateUUID();
   res.status(200).send(query);
 });
 
@@ -43,7 +43,7 @@ app.post("/sort/string", async (req, res) => {
     requestData.data,
     Object.getOwnPropertyNames(requestData)
   );
-  await res
+  res
     .status(200)
     .send({ data: query.value, msg: `${query.status}`, status: query.status });
 });
@@ -61,21 +61,21 @@ app.post("/store", async (req, res) => {
 });
 
 app.post("/random", async (req, res) => {
-  const query = await new DataGenerator().create(
+  const query = new DataGenerator().create(
     req.body.length,
     req.body.type
   );
-  await res.status(200).send(query);
+  res.status(200).send(query);
 });
 
 app.post("/ifsc", async (req, res) => {
   const query = await new Authorized().main(req.body.ifsc);
-  await res.status(200).send(query);
+  res.status(200).send(query);
 });
 
 app.post("/pincode", async (req, res) => {
   const query = await new Authorized().postal(req.body.pinCode);
-  await res.status(200).send(query);
+  res.status(200).send(query);
 });
 
 app.post("/info", async (req, res) => {
@@ -99,7 +99,7 @@ app.post("/info", async (req, res) => {
         statusCode: 404,
         msg: `not fund data : ${res.body.name}`,
       };
-  await res.status(200).send(ans);
+  res.status(200).send(ans);
 });
 
 app.post("/search", async (req, res) => {
