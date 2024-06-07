@@ -1,5 +1,5 @@
 const readline = require("readline");
-const Logger = require("robotic.js/interface/Logger");
+const Logger = require("robotic.js/src/interface/Logger");
 const TypeScript = require("./typeScript");
 const JavaScript = require("./javaScript");
 const Binary = require("./bin");
