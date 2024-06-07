@@ -1,12 +1,11 @@
 const axios = require("axios");
 const Environment = require("./environment");
-const env = new Environment();
 const ExcelJS = require("exceljs");
 
 class Authorized {
   main(params) {
     return axios
-      .get(`${env.api}${params}`)
+      .get(`${new Environment().api}${params}`)
       .then((response) => {
         return {
           data: response.data,
@@ -21,7 +20,7 @@ class Authorized {
 
   postal(params) {
     return axios
-      .get(`${env.locationApi}${params}`)
+      .get(`${new Environment().locationApi}${params}`)
       .then((response) => {
         return response.data;
       })
