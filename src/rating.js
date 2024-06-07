@@ -1,4 +1,4 @@
-const Logger = require("robotic.js/interface/Logger");
+const Logger = require("robotic.js/src/interface/Logger");
 const logger = new Logger();
 const tf = require("@tensorflow/tfjs");
 
