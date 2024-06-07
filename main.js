@@ -17,7 +17,7 @@ const [
   require("body-parser"),
   require("robotic.js/src/interface/color"),
   require("robotic.js/src/interface/Logger"),
-  require("./src/otp"),
+  require("robotic.js/src/class/OtpGenerator"),
   require("robotic.js/src/class/uuid"),
   require("./src/stringSort"),
   require("./src/binaryEncrypted"),
@@ -43,13 +43,13 @@ app.get("/create/account", async (req, res) => {
 });
 
 app.get("/create/otp", async (req, res) => {
-  const query = new OtpCrater().otpCreate();
-  res.status(200).send(query);
+  const query = new OtpCrater().new();
+  res.send(query.toString());
 });
 
 app.get("/create/uuid", async (req, res) => {
   const query = new Uuid().vectorized();
-  res.status(200).send(query);
+  res.send(query);
 });
 
 app.post("/sort/string", async (req, res) => {
