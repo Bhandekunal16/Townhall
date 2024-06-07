@@ -27,9 +27,10 @@ const [
 ];
 
 const app = express();
+const port = 3004;
 app.use(bodyParser.json());
 app.use(cors());
-const port = 3004;
+
 
 app.get("/", async (req, res) => {
   const query = "hello world";
