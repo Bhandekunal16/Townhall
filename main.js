@@ -16,12 +16,6 @@ app.use(bodyParser.json());
 app.use(cors());
 const port = 3004;
 
-const sort = new SortService();
-const data = new DataGenerator();
-const locker = new BinaryLocker();
-const node = new Node();
-const authorized = new Authorized();
-
 app.get("/", async (req, res) => {
   const query = "hello world";
   res.send(query);
@@ -75,17 +69,17 @@ app.post("/random", async (req, res) => {
 });
 
 app.post("/ifsc", async (req, res) => {
-  const query = await authorized.main(req.body.ifsc);
+  const query = await new Authorized().main(req.body.ifsc);
   await res.status(200).send(query);
 });
 
 app.post("/pincode", async (req, res) => {
-  const query = await authorized.postal(req.body.pinCode);
+  const query = await new Authorized().postal(req.body.pinCode);
   await res.status(200).send(query);
 });
 
 app.post("/info", async (req, res) => {
-  const query = await authorized
+  const query = await new Authorized()
     .getPackageInfo(req.body.name)
     .then((packageInfo) => {
       if (packageInfo) {
@@ -109,12 +103,12 @@ app.post("/info", async (req, res) => {
 });
 
 app.post("/search", async (req, res) => {
-  const query = await authorized.NpmSearch(req.body.name);
+  const query = await new Authorized().NpmSearch(req.body.name);
   res.status(200).send(query);
 });
 
 app.post("/npm/view", async (req, res) => {
-  const query = await authorized.NpmView(
+  const query = await new Authorized().NpmView(
     req.body.userName,
     req.body.packageName
   );
@@ -122,7 +116,7 @@ app.post("/npm/view", async (req, res) => {
 });
 
 app.post("/v2/npm/view", async (req, res) => {
-  const query = await authorized.NpmViewV2(req.body.name);
+  const query = await new Authorized().NpmViewV2(req.body.name);
   res.status(200).send(query);
 });
 
@@ -139,7 +133,7 @@ const routes = [
 ];
 
 let imports = routes.map((elements) => elements.name);
-const elements1 = node.output();
+const elements1 = new Node().output();
 
 imports = [...imports, ...elements1];
 
@@ -150,5 +144,5 @@ app.listen(port, () => {
     `Node app is successfully created on http://localhost: ${port}.`
   );
   new Logger().log("***************");
-  node.getUserInput();
+  new Node().getUserInput();
 });
