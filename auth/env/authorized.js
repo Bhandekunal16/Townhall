@@ -45,7 +45,12 @@ class Authorized {
   }
 
   async readExcelToArray(filePath, output) {
-    const [workbook, dataArray] = [new ExcelJS.Workbook(), []];
+    const [workbook, dataArray, array, errorArray] = [
+      new ExcelJS.Workbook(),
+      [],
+      [],
+      [],
+    ];
     try {
       await workbook.xlsx.readFile(filePath);
       const worksheet = workbook.getWorksheet(1);
@@ -59,10 +64,6 @@ class Authorized {
           dataArray.push(rowData);
         }
       });
-
-      let array = [];
-      let errorArray = [];
-      console.log(dataArray.length);
       for (let index = 0; index < dataArray.length; index++) {
         try {
           console.log("Index:", index, dataArray[index].pincode);
