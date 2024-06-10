@@ -19,7 +19,7 @@ module.exports = function isLogger(req, res, next) {
   );
 };
 
-function logRequest(req) {
+logRequest = (req) => {
   new Logger().log(req.url),
     new Logger().log(req.method),
     new Logger().log(req.hostname),
@@ -27,4 +27,4 @@ function logRequest(req) {
     new Logger().log(
       `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`
     );
-}
+};
