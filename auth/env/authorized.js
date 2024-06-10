@@ -85,7 +85,6 @@ class Authorized {
       );
       return response.data;
     } catch (error) {
-      console.error("Error fetching package details:", error);
       return null;
     }
   }
