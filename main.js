@@ -96,8 +96,7 @@ app.post("/info", async (req, res) => {
 });
 
 app.post("/search", async (req, res) => {
-  const query = await new Authorized().NpmSearch(req.body.name);
-  res.send(query);
+  res.send(await new Authorized().NpmSearch(req.body.name));
 });
 
 app.post("/npm/view", async (req, res) => {
