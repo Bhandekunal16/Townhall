@@ -1,4 +1,7 @@
-const db = require("roboticdb/src/brain");
+const [db, Logger] = [
+  require("roboticdb/src/brain"),
+  require("robotic.js/src/interface/Logger"),
+];
 module.exports = function isLogger(req, res, next) {
   next(
     req.hostname == "localhost"
@@ -12,7 +15,7 @@ module.exports = function isLogger(req, res, next) {
           },
           "log"
         )
-      : console.log({
+      : new Logger().log({
           url: req.url,
           method: req.method,
           host: req.hostname,
