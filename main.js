@@ -138,7 +138,7 @@ app.listen(process.env.port, () => {
   new Logger().log("***************");
   new Logger().new(imports);
   new Logger().log(
-    `Node app is successfully created on http://localhost: ${port}.`
+    `Node app is successfully created on http://localhost: ${process.env.port}.`
   );
   new Logger().log("***************");
   new Node().getUserInput();
