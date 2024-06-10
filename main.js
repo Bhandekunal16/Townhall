@@ -32,8 +32,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  const query = "hello world";
-  res.send(query);
+  res.send("hello world");
 });
 
 app.get("/create/account", async (req, res) => {
