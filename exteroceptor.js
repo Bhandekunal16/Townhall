@@ -5,7 +5,7 @@ module.exports = function isLogger(req, res, next) {
       {
         url: req.url,
         method: req.method,
-        host: req.host,
+        host: req.hostname,
         body: req.body,
         hitOn: `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
       },
