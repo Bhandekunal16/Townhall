@@ -123,18 +123,8 @@ class Authorized {
         `https://npm-trends-proxy.uidotdev.workers.dev/npm/registry/${name}`
       );
       return response.data.name !== undefined
-        ? {
-            data: response.data,
-            status: true,
-            statusCode: 200,
-            msg: `Data found ${name};`,
-          }
-        : {
-            data: null,
-            status: false,
-            statusCode: 404,
-            msg: `Data not found ${name};`,
-          };
+        ? new Response().success(response.data, `Data found ${name};`)
+        : new Response().notFound(null, `Data not found ${name};`);
     } catch (error) {
       return { res: error, status: false, statusCode: 500, msg: "error" };
     }
