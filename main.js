@@ -45,8 +45,7 @@ app.get("/create/otp", (req, res) => {
 });
 
 app.get("/create/uuid", (req, res) => {
-  const query = new Uuid().vectorized();
-  res.send(query);
+  res.send(new Uuid().vectorized());
 });
 
 app.post("/sort/string", async (req, res) => {
