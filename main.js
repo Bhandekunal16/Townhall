@@ -32,9 +32,7 @@ const [
   require("robotic-env-reader/index"),
 ];
 new Config().loadEnv(".env");
-
 const app = express();
-
 app.use(bodyParser.json());
 app.use(cors());
 app.use(exteroceptor);
