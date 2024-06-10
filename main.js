@@ -74,8 +74,7 @@ app.post("/random", (req, res) => {
 });
 
 app.post("/ifsc", async (req, res) => {
-  const query = await new Authorized().main(req.body.ifsc);
-  res.send(query);
+  res.send(await new Authorized().main(req.body.ifsc));
 });
 
 app.post("/pincode", async (req, res) => {
