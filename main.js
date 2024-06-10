@@ -88,10 +88,15 @@ app.post("/info", async (req, res) => {
         return packageInfo;
       }
     });
-  const ans = query
-    ? new Response().success(query, `successfully fund data : ${req.body.name}`)
-    : new Response().notFound(null, `not fund data : ${res.body.name}`);
-  res.send(ans);
+
+  res.send(
+    query
+      ? new Response().success(
+          query,
+          `successfully fund data : ${req.body.name}`
+        )
+      : new Response().notFound(null, `not fund data : ${res.body.name}`)
+  );
 });
 
 app.post("/search", async (req, res) => {
