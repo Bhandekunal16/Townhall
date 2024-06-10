@@ -45,9 +45,7 @@ class Authorized {
   }
 
   async readExcelToArray(filePath, output) {
-    const workbook = new ExcelJS.Workbook();
-    const dataArray = [];
-
+    const [workbook, dataArray] = [new ExcelJS.Workbook(), []];
     try {
       await workbook.xlsx.readFile(filePath);
       const worksheet = workbook.getWorksheet(1);
