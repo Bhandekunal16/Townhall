@@ -1,6 +1,11 @@
 export = Authorized;
 declare class Authorized {
-  main(params: string): Promise<any>;
+  main(params: string): Promise<{
+    data: any;
+    statusCode: number;
+    status: boolean;
+    msg: any;
+  }>;
   postal(params: string): Promise<any>;
   createExcelFile(dataArray: any[], filePath: string): Promise<void>;
   readExcelToArray(filePath: string, output: any): Promise<any>;
