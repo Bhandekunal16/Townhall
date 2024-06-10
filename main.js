@@ -85,8 +85,7 @@ app.post("/sort/string", async (req, res) => {
 });
 
 app.post("/store", (req, res) => {
-  const requestData = req.body;
-  const header = req.hostname;
+  const [requestData, header] = [req.body, req.hostname];
   const query = new BinaryLocker().createBinaryFile(
     requestData.data,
     requestData.name,
