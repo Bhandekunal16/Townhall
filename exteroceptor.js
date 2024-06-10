@@ -12,6 +12,12 @@ module.exports = function isLogger(req, res, next) {
           },
           "log"
         )
-      : console.log("i am working")
+      : console.log({
+          url: req.url,
+          method: req.method,
+          host: req.hostname,
+          body: req.body,
+          hitOn: `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
+        })
   );
 };
