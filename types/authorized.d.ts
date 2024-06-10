@@ -6,7 +6,20 @@ declare class Authorized {
     status: boolean;
     msg: any;
   }>;
-  postal(params: string): Promise<any>;
+  postal(params: string): Promise<
+    | {
+        data: any;
+        statusCode: number;
+        status: boolean;
+        msg: any;
+      }
+    | {
+        response: any;
+        statusCode: number;
+        status: boolean;
+        msg: any;
+      }
+  >;
   createExcelFile(dataArray: any[], filePath: string): Promise<void>;
   readExcelToArray(filePath: string, output: any): Promise<any>;
   getPackageInfo(packageName: string): Promise<any>;
