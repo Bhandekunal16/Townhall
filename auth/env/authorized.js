@@ -21,10 +21,13 @@ class Authorized {
     return axios
       .get(`${new Environment().locationApi}${params}`)
       .then((response) => {
-        return response.data;
+        return new Response().success(
+          response.data[0].PostOffice,
+          `successfully found data of  + ${response.data[0].PostOffice.length}`
+        );
       })
       .catch((error) => {
-        console.error("Error:", error);
+        return new Response().error(error);
       });
   }
 
