@@ -49,6 +49,32 @@ app.get("/create/uuid", (req, res) => {
   res.send(new Uuid().vectorized());
 });
 
+app.post("/random", (req, res) => {
+  res.send(new DataGenerator().create(req.body.length, req.body.type));
+});
+
+app.post("/ifsc", async (req, res) => {
+  res.send(await new Authorized().main(req.body.ifsc));
+});
+
+app.post("/pincode", async (req, res) => {
+  res.send(await new Authorized().postal(req.body.pinCode));
+});
+
+app.post("/v2/npm/view", async (req, res) => {
+  res.send(await new Authorized().NpmViewV2(req.body.name));
+});
+
+app.post("/search", async (req, res) => {
+  res.send(await new Authorized().NpmSearch(req.body.name));
+});
+
+app.post("/npm/view", async (req, res) => {
+  res.send(
+    await new Authorized().NpmView(req.body.userName, req.body.packageName)
+  );
+});
+
 app.post("/sort/string", async (req, res) => {
   const requestData = req.body;
   const query = await new SortService().write(
@@ -69,18 +95,6 @@ app.post("/store", (req, res) => {
   res.send({ data: query, msg: "success", status: true });
 });
 
-app.post("/random", (req, res) => {
-  res.send(new DataGenerator().create(req.body.length, req.body.type));
-});
-
-app.post("/ifsc", async (req, res) => {
-  res.send(await new Authorized().main(req.body.ifsc));
-});
-
-app.post("/pincode", async (req, res) => {
-  res.send(await new Authorized().postal(req.body.pinCode));
-});
-
 app.post("/info", async (req, res) => {
   const query = await new Authorized()
     .getPackageInfo(req.body.name)
@@ -98,20 +112,6 @@ app.post("/info", async (req, res) => {
         )
       : new Response().notFound(null, `not fund data : ${res.body.name}`)
   );
-});
-
-app.post("/search", async (req, res) => {
-  res.send(await new Authorized().NpmSearch(req.body.name));
-});
-
-app.post("/npm/view", async (req, res) => {
-  res.send(
-    await new Authorized().NpmView(req.body.userName, req.body.packageName)
-  );
-});
-
-app.post("/v2/npm/view", async (req, res) => {
-  res.send(await new Authorized().NpmViewV2(req.body.name));
 });
 
 const routes = [
