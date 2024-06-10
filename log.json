@@ -22,5 +22,13 @@
     "host": "localhost",
     "body": {},
     "hitOn": "1/5/2024"
+  },
+  {
+    "id": "726e6d676a73646d6c6c",
+    "url": "/pincode",
+    "method": "POST",
+    "host": "localhost",
+    "body": { "pinCode": "421401" },
+    "hitOn": "1/5/2024"
   }
 ]
