@@ -15,18 +15,18 @@ class Authorized {
     }
   }
 
-  postal(params) {
-    return axios
-      .get(`${new Environment().locationApi}${params}`)
-      .then((response) => {
-        return new Response().success(
-          response.data[0].PostOffice,
-          `successfully found data of  + ${response.data[0].PostOffice.length}`
-        );
-      })
-      .catch((error) => {
-        return new Response().error(error);
-      });
+  async postal(params) {
+    try {
+      const query = await axios.get(
+        `${new Environment().locationApi}${params}`
+      );
+      return new Response().success(
+        query.data[0].PostOffice,
+        `successfully found data of  + ${query.data[0].PostOffice.length}`
+      );
+    } catch (error) {
+      return new Response().error(error);
+    }
   }
 
   async createExcelFile(dataArray, filePath) {
