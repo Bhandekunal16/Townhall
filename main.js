@@ -11,6 +11,7 @@ const [
   DataGenerator,
   Node,
   Authorized,
+  Response,
 ] = [
   require("express"),
   require("cors"),
@@ -24,6 +25,7 @@ const [
   require("robotic.js/src/class/dataGenerate"),
   require("robotic.js/src/module/index"),
   require("./auth/env/authorized"),
+  require("robotic.js/src/class/response"),
 ];
 
 const app = express();
@@ -92,18 +94,8 @@ app.post("/info", async (req, res) => {
       }
     });
   const ans = query
-    ? {
-        data: query,
-        status: true,
-        statusCode: 200,
-        msg: `successfully fund data : ${req.body.name}`,
-      }
-    : {
-        data: null,
-        status: false,
-        statusCode: 404,
-        msg: `not fund data : ${res.body.name}`,
-      };
+    ? new Response().success(query, `successfully fund data : ${req.body.name}`)
+    : new Response().notFound(null, `not fund data : ${res.body.name}`);
   res.status(200).send(ans);
 });
 
