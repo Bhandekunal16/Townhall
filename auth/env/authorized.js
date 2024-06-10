@@ -72,7 +72,6 @@ class Authorized {
         }
       }
       this.createExcelFile(array, output);
-
       return array;
     } catch (error) {
       error;
