@@ -68,7 +68,7 @@ app.post("/store", (req, res) => {
     header
   );
 
-  res.status(200).send({ data: query, msg: "success", status: true });
+  res.send({ data: query, msg: "success", status: true });
 });
 
 app.post("/random", (req, res) => {
