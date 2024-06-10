@@ -73,17 +73,17 @@ app.post("/store", (req, res) => {
 
 app.post("/random", (req, res) => {
   const query = new DataGenerator().create(req.body.length, req.body.type);
-  res.status(200).send(query);
+  res.send(query);
 });
 
 app.post("/ifsc", async (req, res) => {
   const query = await new Authorized().main(req.body.ifsc);
-  res.status(200).send(query);
+  res.send(query);
 });
 
 app.post("/pincode", async (req, res) => {
   const query = await new Authorized().postal(req.body.pinCode);
-  res.status(200).send(query);
+  res.send(query);
 });
 
 app.post("/info", async (req, res) => {
@@ -97,12 +97,12 @@ app.post("/info", async (req, res) => {
   const ans = query
     ? new Response().success(query, `successfully fund data : ${req.body.name}`)
     : new Response().notFound(null, `not fund data : ${res.body.name}`);
-  res.status(200).send(ans);
+  res.send(ans);
 });
 
 app.post("/search", async (req, res) => {
   const query = await new Authorized().NpmSearch(req.body.name);
-  res.status(200).send(query);
+  res.send(query);
 });
 
 app.post("/npm/view", async (req, res) => {
@@ -110,12 +110,12 @@ app.post("/npm/view", async (req, res) => {
     req.body.userName,
     req.body.packageName
   );
-  res.status(200).send(query);
+  res.send(query);
 });
 
 app.post("/v2/npm/view", async (req, res) => {
   const query = await new Authorized().NpmViewV2(req.body.name);
-  res.status(200).send(query);
+  res.send(query);
 });
 
 const routes = [
