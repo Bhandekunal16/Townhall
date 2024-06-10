@@ -6,15 +6,13 @@ const [axios, Environment, ExcelJS, Response] = [
 ];
 
 class Authorized {
-  main(params) {
-    return axios
-      .get(`${new Environment().api}${params}`)
-      .then((response) => {
-        return new Response().success(response.data, "success");
-      })
-      .catch((error) => {
-        return new Response().error(error);
-      });
+  async main(params) {
+    try {
+      const query = await axios.get(`${new Environment().api}${params}`);
+      return new Response().success(query.data, "success");
+    } catch (error) {
+      return new Response().error(error);
+    }
   }
 
   postal(params) {
