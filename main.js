@@ -65,7 +65,6 @@ app.post("/store", (req, res) => {
     requestData.name,
     header
   );
-
   res.send({ data: query, msg: "success", status: true });
 });
 
