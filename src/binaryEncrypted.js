@@ -19,13 +19,12 @@ class BinaryLocker {
     if (!fs.existsSync(this.folderPath)) {
       fs.mkdirSync(this.folderPath, { recursive: true });
     }
-    const fileName = `${name}.bin`;
     const value = this.convertToBinary(data);
     const bufferData = Buffer.from(value, "binary");
-    const filePath = `${this.folderPath}/${fileName}`;
-    const resPath = `${header}/locker/api/${fileName}`;
+    const filePath = `${this.folderPath}/${name}.bin`;
+    const resPath = `${header}/locker/api/${name}.bin`;
     fs.writeFileSync(filePath, bufferData);
-    return resPath == undefined ? "error" : fileName;
+    return resPath == undefined ? "error" : `${name}.bin`;
   }
 }
 
