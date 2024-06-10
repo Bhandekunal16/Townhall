@@ -21,8 +21,10 @@ class BinaryLocker {
     }
     const value = this.convertToBinary(data);
     const bufferData = Buffer.from(value, "binary");
-    const filePath = `${this.folderPath}/${name}.bin`;
-    const resPath = `${header}/locker/api/${name}.bin`;
+    const [filePath, resPath] = [
+      `${this.folderPath}/${name}.bin`,
+      `${header}/locker/api/${name}.bin`,
+    ];
     fs.writeFileSync(filePath, bufferData);
     return resPath == undefined ? "error" : `${name}.bin`;
   }
