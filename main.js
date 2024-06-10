@@ -100,11 +100,9 @@ app.post("/search", async (req, res) => {
 });
 
 app.post("/npm/view", async (req, res) => {
-  const query = await new Authorized().NpmView(
-    req.body.userName,
-    req.body.packageName
+  res.send(
+    await new Authorized().NpmView(req.body.userName, req.body.packageName)
   );
-  res.send(query);
 });
 
 app.post("/v2/npm/view", async (req, res) => {
