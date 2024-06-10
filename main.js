@@ -136,7 +136,7 @@ app.listen(process.env.port, () => {
   new Logger().log("*".repeat(140));
   new Logger().new(imports);
   new Logger().log(
-    `Node app is running on http://localhost: ${process.env.port}.`
+    `Node app is running on http://localhost:${process.env.port}.`
   );
   new Logger().log("*".repeat(140));
   new Node().getUserInput();
