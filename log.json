@@ -1,0 +1,26 @@
+[
+  {
+    "id": "706470716d666d677a77",
+    "url": "/ifsc",
+    "method": "POST",
+    "host": "localhost",
+    "body": { "ifsc": "SBIN0000300" },
+    "hitOn": "1/5/2024"
+  },
+  {
+    "id": "626e6e6a797676666a72",
+    "url": "/",
+    "method": "GET",
+    "host": "localhost",
+    "body": {},
+    "hitOn": "1/5/2024"
+  },
+  {
+    "id": "6b7177746470726b776c",
+    "url": "/",
+    "method": "GET",
+    "host": "localhost",
+    "body": {},
+    "hitOn": "1/5/2024"
+  }
+]
