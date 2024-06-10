@@ -110,18 +110,8 @@ class Authorized {
         `https://npm-trends-proxy.uidotdev.workers.dev/github/repos/${userName}/${packageName}`
       );
       return response.data.name !== undefined
-        ? {
-            data: response.data,
-            status: true,
-            statusCode: 200,
-            msg: `Data found ${packageName};`,
-          }
-        : {
-            data: null,
-            status: false,
-            statusCode: 404,
-            msg: `Data not found ${packageName};`,
-          };
+        ? new Response().success(response.data, `Data found ${packageName};`)
+        : new Response().notFound(null, `Data not found ${packageName};`);
     } catch (error) {
       return { res: error, status: false, statusCode: 500, msg: "error" };
     }
