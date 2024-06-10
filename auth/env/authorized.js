@@ -1,7 +1,8 @@
-const [axios, Environment, ExcelJS] = [
+const [axios, Environment, ExcelJS, Response] = [
   require("axios"),
   require("./environment"),
   require("exceljs"),
+  require("robotic.js/src/class/response"),
 ];
 
 class Authorized {
@@ -9,14 +10,10 @@ class Authorized {
     return axios
       .get(`${new Environment().api}${params}`)
       .then((response) => {
-        return {
-          data: response.data,
-          status: true,
-          statusCode: 200,
-        };
+        return new Response().success(response.data, "success");
       })
       .catch((error) => {
-        return { res: error, status: false, statusCode: 500, error: "error" };
+        return new Response().error(error);
       });
   }
 
