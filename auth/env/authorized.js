@@ -34,7 +34,6 @@ class Authorized {
   async createExcelFile(dataArray, filePath) {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Data");
-
     worksheet.addRow(Object.keys(dataArray[0]));
 
     dataArray.forEach((obj) => {
