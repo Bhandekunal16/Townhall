@@ -106,8 +106,7 @@ app.post("/npm/view", async (req, res) => {
 });
 
 app.post("/v2/npm/view", async (req, res) => {
-  const query = await new Authorized().NpmViewV2(req.body.name);
-  res.send(query);
+  res.send(await new Authorized().NpmViewV2(req.body.name));
 });
 
 const routes = [
