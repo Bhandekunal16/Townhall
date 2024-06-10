@@ -70,8 +70,7 @@ app.post("/store", (req, res) => {
 });
 
 app.post("/random", (req, res) => {
-  const query = new DataGenerator().create(req.body.length, req.body.type);
-  res.send(query);
+  res.send(new DataGenerator().create(req.body.length, req.body.type));
 });
 
 app.post("/ifsc", async (req, res) => {
