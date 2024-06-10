@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(exteroceptor);
 
-app.get("/", exteroceptor, (req, res) => {
+app.get("/", (req, res) => {
   res.send("hello world");
 });
 
