@@ -56,13 +56,11 @@ class Authorized {
       const worksheet = workbook.getWorksheet(1);
 
       worksheet.eachRow(async (row, rowNumber) => {
-        if (rowNumber > 1) {
-          const rowData = {
+        if (rowNumber > 1)
+          dataArray.push({
             number: row.getCell(1).value,
             pincode: row.getCell(2).value.toString(),
-          };
-          dataArray.push(rowData);
-        }
+          });
       });
       for (let index = 0; index < dataArray.length; index++) {
         try {
