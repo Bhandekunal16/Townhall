@@ -41,8 +41,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/create/otp", (req, res) => {
-  const query = new OtpCrater().new();
-  res.send(query.toString());
+  res.send(`${new OtpCrater().new()}`);
 });
 
 app.get("/create/uuid", (req, res) => {
