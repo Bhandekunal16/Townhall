@@ -56,9 +56,7 @@ app.post("/sort/string", async (req, res) => {
     requestData.data,
     Object.getOwnPropertyNames(requestData)
   );
-  res
-    .status(200)
-    .send({ data: query.value, msg: `${query.status}`, status: query.status });
+  res.send({ data: query.value, msg: `${query.status}`, status: query.status });
 });
 
 app.post("/store", (req, res) => {
