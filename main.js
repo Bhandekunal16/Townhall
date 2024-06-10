@@ -1,3 +1,5 @@
+const exteroceptor = require("./exteroceptor");
+
 const [
   express,
   cors,
@@ -32,8 +34,9 @@ const app = express();
 const port = 3004;
 app.use(bodyParser.json());
 app.use(cors());
+app.use(exteroceptor);
 
-app.get("/", (req, res) => {
+app.get("/", exteroceptor, (req, res) => {
   res.send("hello world");
 });
 
