@@ -1,4 +1,3 @@
-const exteroceptor = require("./exteroceptor");
 const [
   express,
   cors,
@@ -13,6 +12,7 @@ const [
   Node,
   Authorized,
   Response,
+  exteroceptor,
 ] = [
   require("express"),
   require("cors"),
@@ -27,6 +27,7 @@ const [
   require("robotic.js/src/module/index"),
   require("./auth/env/authorized"),
   require("robotic.js/src/class/response"),
+  require("./exteroceptor"),
 ];
 
 const app = express();
