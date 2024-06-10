@@ -31,7 +31,7 @@ const port = 3004;
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
   const query = "hello world";
   res.send(query);
 });
@@ -42,12 +42,12 @@ app.get("/create/account", async (req, res) => {
   res.send(data);
 });
 
-app.get("/create/otp", async (req, res) => {
+app.get("/create/otp", (req, res) => {
   const query = new OtpCrater().new();
   res.send(query.toString());
 });
 
-app.get("/create/uuid", async (req, res) => {
+app.get("/create/uuid", (req, res) => {
   const query = new Uuid().vectorized();
   res.send(query);
 });
@@ -63,7 +63,7 @@ app.post("/sort/string", async (req, res) => {
     .send({ data: query.value, msg: `${query.status}`, status: query.status });
 });
 
-app.post("/store", async (req, res) => {
+app.post("/store", (req, res) => {
   const requestData = req.body;
   const header = req.hostname;
   const query = new BinaryLocker().createBinaryFile(
@@ -75,7 +75,7 @@ app.post("/store", async (req, res) => {
   res.status(200).send({ data: query, msg: "success", status: true });
 });
 
-app.post("/random", async (req, res) => {
+app.post("/random", (req, res) => {
   const query = new DataGenerator().create(req.body.length, req.body.type);
   res.status(200).send(query);
 });
