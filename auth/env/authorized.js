@@ -85,7 +85,7 @@ class Authorized {
       );
       return response.data;
     } catch (error) {
-      return null;
+      return new Response().error(error);
     }
   }
 
