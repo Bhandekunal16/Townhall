@@ -1,5 +1,3 @@
-let array = ["1", "3", "4", "5", "8", "9", "10", "2", "6", "7"];
-
 class SortService {
   async write(data, key) {
     try {
