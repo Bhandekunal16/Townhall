@@ -1,5 +1,3 @@
-const { Log } = require("@tensorflow/tfjs");
-
 const [db, Logger] = [
   require("roboticdb/src/brain"),
   require("robotic.js/src/interface/Logger"),
