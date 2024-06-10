@@ -97,7 +97,7 @@ class Authorized {
       );
       console.log(response);
       return response.data
-        ? new Response.success(response.data, `Data found for ${name}`)
+        ? new Response().success(response.data, `Data found for ${name}`)
         : new Response().notFound(null, `not found for ${name}`);
     } catch (error) {
       return { res: error, status: false, statusCode: 500, msg: "error" };
