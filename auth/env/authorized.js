@@ -64,7 +64,6 @@ class Authorized {
       });
       for (let index = 0; index < dataArray.length; index++) {
         try {
-          console.log("Index:", index, dataArray[index].pincode);
           const write = await this.postal(dataArray[index].pincode);
           write[0].PostOffice[0] == undefined
             ? array.push({})
