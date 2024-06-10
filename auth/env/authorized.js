@@ -99,7 +99,7 @@ class Authorized {
         ? new Response().success(response.data, `Data found for ${name}`)
         : new Response().notFound(null, `not found for ${name}`);
     } catch (error) {
-      return { res: error, status: false, statusCode: 500, msg: "error" };
+      return new Response().error(error);
     }
   }
 
