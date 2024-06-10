@@ -133,11 +133,11 @@ const elements1 = new Node().output();
 imports = [...imports, ...elements1];
 
 app.listen(process.env.port, () => {
-  new Logger().log("***************");
+  new Logger().log("*".repeat(100));
   new Logger().new(imports);
   new Logger().log(
     `Node app is successfully created on http://localhost: ${process.env.port}.`
   );
-  new Logger().log("***************");
+  new Logger().log("*".repeat(100));
   new Node().getUserInput();
 });
