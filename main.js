@@ -98,9 +98,7 @@ app.post("/info", async (req, res) => {
   const query = await new Authorized()
     .getPackageInfo(req.body.name)
     .then((packageInfo) => {
-      if (packageInfo) {
-        return packageInfo;
-      }
+      if (packageInfo) return packageInfo;
     });
 
   res.send(
