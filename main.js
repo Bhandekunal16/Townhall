@@ -35,12 +35,6 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-app.get("/create/account", async (req, res) => {
-  const query = await account.createAccount();
-  const data = query.map((value) => value);
-  res.send(data);
-});
-
 app.get("/create/otp", (req, res) => {
   const query = new OtpCrater().new();
   res.send(query.toString());
