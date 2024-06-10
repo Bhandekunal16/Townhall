@@ -18,7 +18,7 @@ class Authorized {
   async postal(params) {
     try {
       const query = await axios.get(
-        `${new Environment().locationApi}${params}`
+        `${new Environment().location}${params}`
       );
       return new Response().success(
         query.data[0].PostOffice,
