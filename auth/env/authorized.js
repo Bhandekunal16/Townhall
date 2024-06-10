@@ -55,7 +55,7 @@ class Authorized {
       await workbook.xlsx.readFile(filePath);
       const worksheet = workbook.getWorksheet(1);
 
-      worksheet.eachRow(async (row, rowNumber) => {
+      worksheet.eachRow((row, rowNumber) => {
         if (rowNumber > 1)
           dataArray.push({
             number: row.getCell(1).value,
