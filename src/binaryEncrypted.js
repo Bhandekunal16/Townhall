@@ -19,8 +19,7 @@ class BinaryLocker {
     if (!fs.existsSync(this.folderPath)) {
       fs.mkdirSync(this.folderPath, { recursive: true });
     }
-    const value = this.convertToBinary(data);
-    const bufferData = Buffer.from(value, "binary");
+    const bufferData = Buffer.from(this.convertToBinary(data), "binary");
     const [filePath, resPath] = [
       `${this.folderPath}/${name}.bin`,
       `${header}/locker/api/${name}.bin`,
