@@ -13,6 +13,7 @@ const [
   Authorized,
   Response,
   exteroceptor,
+  Config,
 ] = [
   require("express"),
   require("cors"),
@@ -28,10 +29,12 @@ const [
   require("./auth/env/authorized"),
   require("robotic.js/src/class/response"),
   require("./exteroceptor"),
+  require("robotic-env-reader/index"),
 ];
+new Config().loadEnv(".env");
 
 const app = express();
-const port = 3004;
+
 app.use(bodyParser.json());
 app.use(cors());
 app.use(exteroceptor);
@@ -131,7 +134,7 @@ const elements1 = new Node().output();
 
 imports = [...imports, ...elements1];
 
-app.listen(port, () => {
+app.listen(process.env.port, () => {
   new Logger().log("***************");
   new Logger().new(imports);
   new Logger().log(
