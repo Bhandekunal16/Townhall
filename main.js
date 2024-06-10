@@ -110,15 +110,16 @@ app.post("/v2/npm/view", async (req, res) => {
 });
 
 const routes = [
+  Color,
+  Logger,
   OtpCrater,
   Uuid,
   SortService,
   BinaryLocker,
-  Node,
-  Color,
-  Logger,
   DataGenerator,
+  Node,
   Authorized,
+  Response,
 ];
 
 let imports = routes.map((elements) => elements.name);
