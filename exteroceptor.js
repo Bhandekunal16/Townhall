@@ -15,12 +15,16 @@ module.exports = function isLogger(req, res, next) {
           },
           "log"
         )
-      : new Logger().log(req.url),
+      : logRequest(req)
+  );
+};
+
+function logRequest(req) {
+  new Logger().log(req.url),
     new Logger().log(req.method),
     new Logger().log(req.hostname),
     new Logger().log(req.body),
     new Logger().log(
       `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`
-    )
-  );
-};
+    );
+}
