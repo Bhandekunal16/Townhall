@@ -112,7 +112,7 @@ class Authorized {
         ? new Response().success(response.data, `Data found ${packageName};`)
         : new Response().notFound(null, `Data not found ${packageName};`);
     } catch (error) {
-      return { res: error, status: false, statusCode: 500, msg: "error" };
+      return new Response().error(error);
     }
   }
 
@@ -125,7 +125,7 @@ class Authorized {
         ? new Response().success(response.data, `Data found ${name};`)
         : new Response().notFound(null, `Data not found ${name};`);
     } catch (error) {
-      return { res: error, status: false, statusCode: 500, msg: "error" };
+      return new Response().error(error);
     }
   }
 }
