@@ -33,7 +33,7 @@ const [
   require("robotic-env-reader/index"),
   require("./auth/portfolio/portfolio"),
 ];
-new Config().loadEnv(".env");
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -139,12 +139,10 @@ const elements1 = new Node().output();
 
 imports = [...imports, ...elements1];
 
-app.listen(process.env.port, () => {
+app.listen(3004, () => {
   new Logger().log("*".repeat(140));
   new Logger().new(imports);
-  new Logger().log(
-    `Node app is running on http://localhost:${process.env.port}.`
-  );
+  new Logger().log(`Node app is running on http://localhost:${3004}.`);
   new Logger().log("*".repeat(140));
   new Node().getUserInput();
 });
