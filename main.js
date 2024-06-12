@@ -14,6 +14,7 @@ const [
   Response,
   exteroceptor,
   Config,
+  portfolio,
 ] = [
   require("express"),
   require("cors"),
@@ -30,6 +31,7 @@ const [
   require("robotic.js/src/class/response"),
   require("./exteroceptor"),
   require("robotic-env-reader/index"),
+  require("./auth/portfolio/portfolio"),
 ];
 new Config().loadEnv(".env");
 const app = express();
@@ -73,6 +75,10 @@ app.post("/npm/view", async (req, res) => {
   res.send(
     await new Authorized().NpmView(req.body.userName, req.body.packageName)
   );
+});
+
+app.post("/edit/profile", async (req, res) => {
+  res.send(await new portfolio().update(req.body.input));
 });
 
 app.post("/sort/string", async (req, res) => {
