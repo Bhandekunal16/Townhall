@@ -14,7 +14,6 @@ const [
   Response,
   exteroceptor,
   Config,
-  portfolio,
 ] = [
   require("express"),
   require("cors"),
@@ -31,7 +30,6 @@ const [
   require("robotic.js/src/class/response"),
   require("./exteroceptor"),
   require("robotic-env-reader/index"),
-  require("./auth/portfolio/portfolio"),
 ];
 
 const app = express();
