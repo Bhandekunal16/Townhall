@@ -13,7 +13,6 @@ const [
   Authorized,
   Response,
   exteroceptor,
-  Config,
 ] = [
   require("express"),
   require("cors"),
@@ -29,7 +28,6 @@ const [
   require("./auth/env/authorized"),
   require("robotic.js/src/class/response"),
   require("./exteroceptor"),
-  require("robotic-env-reader/index"),
 ];
 
 const app = express();
