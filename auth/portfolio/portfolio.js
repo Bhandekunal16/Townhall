@@ -16,4 +16,3 @@ class portfolio {
 
 module.exports = portfolio;
 
-new portfolio().get();
