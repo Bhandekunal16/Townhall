@@ -10,9 +10,8 @@ class portfolio {
   }
 
   get() {
-    return new database().getById("746b6a7a787967636a63", "status");
+    return new database().read("status");
   }
 }
 
 module.exports = portfolio;
-
