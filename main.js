@@ -78,7 +78,11 @@ app.post("/npm/view", async (req, res) => {
 });
 
 app.post("/edit/profile", async (req, res) => {
-  res.send(await new portfolio().update(req.body.input));
+  res.send(new portfolio().update(req.body.input));
+});
+
+app.get("/get/profile", async (req, res) => {
+  res.send(new portfolio().get());
 });
 
 app.post("/sort/string", async (req, res) => {
