@@ -113,6 +113,24 @@ class MongoPlants {
       console.error("Error:", error);
     }
   }
+
+  async getAllDocuments() {
+    try {
+      await client.connect();
+      const database = client.db(this.dbName);
+      const collection = database.collection("Nomenclature");
+      const cursor = collection.find();
+      const allDocuments = await cursor.toArray();
+      return {
+        data: allDocuments,
+        msg: "success",
+        status: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 module.exports = MongoPlants;
