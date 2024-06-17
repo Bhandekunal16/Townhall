@@ -22,37 +22,38 @@ class MongoPlants {
         results.push(data);
       })
       .on("end", async () => {
-        console.log(results);
+        // console.log(results);
 
-        let array = [];
+        // let array = [];
         for (let index = 0; index < results.length; index++) {
           const element =
             results[index][
               "taxonID\tscientificNameID\tlocalID\tscientificName\ttaxonRank\tparentNameUsageID\tscientificNameAuthorship\tfamily\tsubfamily\ttribe\tsubtribe\tgenus\tsubgenus\tspecificEpithet\tinfraspecificEpithet\tverbatimTaxonRank\tnomenclaturalStatus\tnamePublishedIn\ttaxonomicStatus\tacceptedNameUsageID\toriginalNameUsageID\tnameAccordingToID\ttaxonRemarks\tcreated\tmodified\treferences\tsource\tmajorGroup\ttplID"
             ];
+          console.log(element);
 
-          array.push({
-            family: element.split("\t")[7],
-            subfamily: element.split("\t")[8],
-            genus: element.split("\t")[11],
-            subgenus: element.split("\t")[12],
-            scientfiicname: element.split("\t")[3],
-            tribe: element.split("\t")[9],
-          });
+          //   array.push({
+          //     family: element.split("\t")[7],
+          //     subfamily: element.split("\t")[8],
+          //     genus: element.split("\t")[11],
+          //     subgenus: element.split("\t")[12],
+          //     scientfiicname: element.split("\t")[3],
+          //     tribe: element.split("\t")[9],
+          //   });
         }
 
-        const batchSize = 500;
+        // const batchSize = 500;
 
-        for (let i = 0; i < array.length; i += batchSize) {
-          const batch = array.slice(i, i + batchSize);
-          await this.write(batch);
+        // for (let i = 0; i < array.length; i += batchSize) {
+        //   const batch = array.slice(i, i + batchSize);
+        //   await this.write(batch);
 
-          console.log(
-            `Processed batch ${i / batchSize + 1} of ${Math.ceil(
-              results.length / batchSize
-            )}`
-          );
-        }
+        //   console.log(
+        //     `Processed batch ${i / batchSize + 1} of ${Math.ceil(
+        //       results.length / batchSize
+        //     )}`
+        //   );
+        // }
       });
   }
 
