@@ -22,9 +22,7 @@ class MongoPlants {
         results.push(data);
       })
       .on("end", async () => {
-        // console.log(results);
-
-        // let array = [];
+        let array = [];
         for (let index = 0; index < results.length; index++) {
           const element =
             results[index][
