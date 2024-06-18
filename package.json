@@ -19,7 +19,6 @@
     "express": "^4.18.2",
     "mongodb": "^6.7.0",
     "neo4j-driver": "^5.21.0",
-    "nodemon": "^3.1.3",
     "robotic-env-reader": "^1.0.0",
     "robotic.js": "^1.4.8",
     "roboticdb": "^1.1.4",
