@@ -81,10 +81,12 @@ class Authorized {
 
   async getPackageInfo(packageName) {
     try {
-      const response = await axios.get(
-        `https://registry.npmjs.org/${packageName}`
-      );
-      return response.data;
+      const response = await fetch(`https://registry.npmjs.org/${packageName}`);
+      if (!response.ok) throw new Error(response.status);
+      else {
+        const data = await response.json();
+        return data;
+      }
     } catch (error) {
       return new Response().error(error);
     }
