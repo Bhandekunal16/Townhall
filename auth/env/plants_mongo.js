@@ -108,7 +108,7 @@ class MongoPlants {
       const database = this.client.db(this.dbName);
       const collection = database.collection(this.collection);
       const count = await collection.countDocuments();
-      return count;
+      return new response().success(count);
     } catch (error) {
       console.error("Error:", error);
     }
