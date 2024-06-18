@@ -18,11 +18,15 @@ class Authorized {
 
   async postal(params) {
     try {
-      const query = await axios.get(`${new Environment().location}${params}`);
-      return new Response().success(
-        query.data[0].PostOffice,
-        `successfully found data of  + ${query.data[0].PostOffice.length}`
-      );
+      const response = await fetch(`${new Environment().location}${params}`);
+      if (!response.ok) throw new Error(response.status);
+      else {
+        const data = await response.json();
+        return new Response().success(
+          data[0].PostOffice,
+          `successfully found data of  + ${data[0].PostOffice.length}`
+        );
+      }
     } catch (error) {
       return new Response().error(error);
     }
