@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const csv = require("csv-parser");
 const response = require("robotic.js/src/class/response");
+const Logger = require("robotic.js/src/interface/Logger");
 
 class MongoPlants {
   constructor() {
@@ -86,7 +87,7 @@ class MongoPlants {
 
   async close() {
     await this.client.close();
-    console.log("MongoDB connection closed");
+    new Logger().log("MongoDB connection closed");
   }
 
   async getAllDocuments() {
