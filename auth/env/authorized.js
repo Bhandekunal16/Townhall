@@ -11,8 +11,7 @@ class Authorized {
       const response = await fetch(`${new Environment().api}${params}`);
       if (!response.ok)
         throw new Error(`HTTP error! status: ${response.status}`);
-      const data = await response.json();
-      return new Response().success(data, "success");
+      return new Response().success(await response.json(), "success");
     } catch (error) {
       return new Response().error(error);
     }
