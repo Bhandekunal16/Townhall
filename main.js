@@ -126,7 +126,7 @@ const routes = [
   Node,
   Authorized,
   Response,
-  MongoPlants
+  MongoPlants,
 ];
 
 let imports = routes.map((elements) => elements.name);
