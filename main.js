@@ -133,10 +133,10 @@ const elements1 = new Node().output();
 
 imports = [...imports, ...elements1];
 
-app.listen(3004, () => {
+app.listen(3004, async () => {
   new Logger().log("*".repeat(140));
   new Logger().new(imports);
-  new Logger().log(new MongoPlants().connect());
+  await new MongoPlants().connect();
   new Logger().log(`Node app is running on http://localhost:${3004}.`);
   new Logger().log("*".repeat(140));
 });
