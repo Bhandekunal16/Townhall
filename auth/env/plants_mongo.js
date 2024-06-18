@@ -110,7 +110,7 @@ class MongoPlants {
       const count = await collection.countDocuments();
       return new response().success(count);
     } catch (error) {
-      console.error("Error:", error);
+      return new response().error(error);
     }
   }
 }
