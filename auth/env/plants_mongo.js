@@ -97,7 +97,6 @@ class MongoPlants {
       const database = this.client.db(this.dbName);
       const collection = database.collection("Nomenclature");
       const cursor = collection.find().limit(1000);
-      console.log(cursor);
       return await cursor.toArray();
     } catch (error) {
       return error;
