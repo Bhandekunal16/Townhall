@@ -112,6 +112,32 @@ class MongoPlants {
       return new response().error(error);
     }
   }
+
+  async getNameByProperty(input) {
+    try {
+      await this.client.connect();
+      const db = this.client.db(this.dbName);
+      const collection = db.collection(this.collection);
+
+      const query = collection.find({ family: input });
+      return new response().success(await query.toArray());
+    } catch (error) {
+      return new response().error(error);
+    }
+  }
+
+  async getCollectionByGenusName(input) {
+    try {
+      await this.client.connect();
+      const db = this.client.db(this.dbName);
+      const collection = db.collection(this.collection);
+
+      const query = collection.find({ genus: input });
+      return new response().success(await query.toArray());
+    } catch (error) {
+      return new response().error(error);
+    }
+  }
 }
 
 module.exports = MongoPlants;

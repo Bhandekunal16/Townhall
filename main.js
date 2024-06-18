@@ -115,6 +115,14 @@ app.post("/info", async (req, res) => {
   );
 });
 
+app.post("/plant/getByFamilyName", async (req, res) => {
+  res.send(await new MongoPlants().getNameByProperty(req.body.name));
+});
+
+app.post("/plant/getCollectionByGenusName", async (req, res) => {
+  res.send(await new MongoPlants().getCollectionByGenusName(req.body.name));
+});
+
 const routes = [
   Color,
   Logger,
