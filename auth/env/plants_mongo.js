@@ -1,9 +1,12 @@
 const { MongoClient } = require("mongodb");
-const fs = require("fs");
-const path = require("path");
-const csv = require("csv-parser");
-const response = require("robotic.js/src/class/response");
-const Logger = require("robotic.js/src/interface/Logger");
+
+const [fs, path, csv, response, Logger] = [
+  require("fs"),
+  require("path"),
+  require("csv-parser"),
+  require("robotic.js/src/class/response"),
+  require("robotic.js/src/interface/Logger"),
+];
 
 class MongoPlants {
   constructor() {
