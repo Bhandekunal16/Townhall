@@ -123,6 +123,12 @@ app.post("/plant/getCollectionByGenusName", async (req, res) => {
   res.send(await new MongoPlants().getCollectionByGenusName(req.body.name));
 });
 
+app.post("/plant/getCollectionByScientificName", async (req, res) => {
+  res.send(
+    await new MongoPlants().getCollectionByScientificName(req.body.name)
+  );
+});
+
 const routes = [
   Color,
   Logger,

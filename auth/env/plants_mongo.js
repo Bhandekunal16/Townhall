@@ -138,6 +138,19 @@ class MongoPlants {
       return new response().error(error);
     }
   }
+
+  async getCollectionByScientificName(input) {
+    try {
+      await this.client.connect();
+      const db = this.client.db(this.dbName);
+      const collection = db.collection(this.collection);
+
+      const query = collection.find({ scientfiicname: input });
+      return new response().success(await query.toArray());
+    } catch (error) {
+      return new response().error(error);
+    }
+  }
 }
 
 module.exports = MongoPlants;
