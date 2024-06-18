@@ -108,19 +108,11 @@ class MongoPlants {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-
     try {
       await this.client.connect();
-      console.log("Connected to MongoDB");
-
       const database = this.client.db(this.dbName);
       const collection = database.collection("Nomenclature");
-
-      // Get count of documents in the collection
       const count = await collection.countDocuments();
-
-      console.log(`Count of documents in collection : ${count}`);
-
       return count;
     } catch (error) {
       console.error("Error:", error);
