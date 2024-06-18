@@ -94,13 +94,16 @@ class Authorized {
 
   async NpmSearch(name) {
     try {
-      const response = await axios.get(
-        `https://api.npms.io/v2/package/${name}`
-      );
-      console.log(response);
-      return response.data
-        ? new Response().success(response.data, `Data found for ${name}`)
-        : new Response().notFound(null, `not found for ${name}`);
+      const response = await fetch(`https://api.npms.io/v2/package/${name}`);
+      if (!response.ok) {
+        if (response.status === 404)
+          return new Response().notFound(null, `not found for ${name}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else
+        return new Response().success(
+          await response.json(),
+          `Data found for ${name}`
+        );
     } catch (error) {
       return new Response().error(error);
     }
