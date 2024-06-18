@@ -9,10 +9,7 @@ class MongoPlants {
     this.uri =
       "mongodb+srv://bhandekunal16:SppcHRFdBS74An8v@cluster0.xxevqv7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
     this.dbName = "Plants";
-    this.client = new MongoClient(this.uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    this.client = new MongoClient(this.uri);
   }
 
   read() {
