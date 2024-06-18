@@ -9,8 +9,7 @@ class Authorized {
   async main(params) {
     try {
       const response = await fetch(`${new Environment().api}${params}`);
-      if (!response.ok)
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok) throw new Error(response.status);
       else return new Response().success(await response.json(), "success");
     } catch (error) {
       return new Response().error(error);
