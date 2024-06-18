@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const Environment = require("./environment");
 
 const [fs, path, csv, response, Logger] = [
   require("fs"),
@@ -10,11 +11,9 @@ const [fs, path, csv, response, Logger] = [
 
 class MongoPlants {
   constructor() {
-    this.uri =
-      "mongodb+srv://bhandekunal16:SppcHRFdBS74An8v@cluster0.xxevqv7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-    this.dbName = "Plants";
-    this.client = new MongoClient(this.uri);
-    this.collection = "Nomenclature";
+    this.dbName = new Environment().dbName;
+    this.client = new MongoClient(new Environment().uri);
+    this.collection = new Environment().collection;
   }
 
   read() {
