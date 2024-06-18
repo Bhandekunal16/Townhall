@@ -2,7 +2,6 @@ const { MongoClient } = require("mongodb");
 const fs = require("fs");
 const path = require("path");
 const csv = require("csv-parser");
-const { all } = require("axios");
 
 class MongoPlants {
   constructor() {
