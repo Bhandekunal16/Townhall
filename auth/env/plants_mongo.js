@@ -2,6 +2,7 @@ const { MongoClient } = require("mongodb");
 const fs = require("fs");
 const path = require("path");
 const csv = require("csv-parser");
+const response = require("robotic.js/src/class/response");
 
 class MongoPlants {
   constructor() {
@@ -96,7 +97,7 @@ class MongoPlants {
       const database = this.client.db(this.dbName);
       const collection = database.collection("Nomenclature");
       const cursor = collection.find().limit(1000);
-      return await cursor.toArray();
+      return new response().success(await cursor.toArray());
     } catch (error) {
       return error;
     }
