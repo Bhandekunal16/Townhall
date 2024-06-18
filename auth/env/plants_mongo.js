@@ -93,8 +93,8 @@ class MongoPlants {
     try {
       await this.client.connect();
       const database = this.client.db(this.dbName);
-      const collection = database.collection(this.collection);
-      const cursor = collection.find().limit(1000);
+      const res = database.collection(this.collection);
+      const cursor = res.find().limit(1000);
       return new response().success(await cursor.toArray());
     } catch (error) {
       return new response().error(error);
