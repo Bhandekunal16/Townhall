@@ -99,7 +99,7 @@ class MongoPlants {
       const cursor = collection.find().limit(1000);
       return new response().success(await cursor.toArray());
     } catch (error) {
-      return error;
+      return new response().error(error);
     }
   }
 
