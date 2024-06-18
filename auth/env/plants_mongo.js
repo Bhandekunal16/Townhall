@@ -64,7 +64,7 @@ class MongoPlants {
   async write(array) {
     const session = this.client.startSession();
     session.startTransaction();
-    console.log(array.length);
+    new Logger().log(array.length);
 
     try {
       const db = this.client.db(this.dbName);
