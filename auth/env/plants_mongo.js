@@ -10,6 +10,7 @@ class MongoPlants {
       "mongodb+srv://bhandekunal16:SppcHRFdBS74An8v@cluster0.xxevqv7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
     this.dbName = "Plants";
     this.client = new MongoClient(this.uri);
+    this.collection = "Nomenclature";
   }
 
   read() {
@@ -69,7 +70,7 @@ class MongoPlants {
 
     try {
       const db = this.client.db(this.dbName);
-      const collection = db.collection("Nomenclature");
+      const collection = db.collection(this.collection);
 
       await collection.insertMany(array, { session });
 
@@ -92,7 +93,7 @@ class MongoPlants {
     try {
       await this.client.connect();
       const database = this.client.db(this.dbName);
-      const collection = database.collection("Nomenclature");
+      const collection = database.collection(this.collection);
       const cursor = collection.find().limit(1000);
       return new response().success(await cursor.toArray());
     } catch (error) {
@@ -104,7 +105,7 @@ class MongoPlants {
     try {
       await this.client.connect();
       const database = this.client.db(this.dbName);
-      const collection = database.collection("Nomenclature");
+      const collection = database.collection(this.collection);
       const count = await collection.countDocuments();
       return count;
     } catch (error) {
