@@ -13,6 +13,7 @@ const [
   Authorized,
   Response,
   exteroceptor,
+  MongoPlants,
 ] = [
   require("express"),
   require("cors"),
@@ -28,6 +29,7 @@ const [
   require("./auth/env/authorized"),
   require("robotic.js/src/class/response"),
   require("./exteroceptor"),
+  require("./auth/env/plants_mongo"),
 ];
 
 const app = express();
@@ -45,6 +47,10 @@ app.get("/create/otp", (req, res) => {
 
 app.get("/create/uuid", (req, res) => {
   res.send(new Uuid().vectorized());
+});
+
+app.get("/plants/species", async (req, res) => {
+  res.send(await new MongoPlants().getAllDocuments());
 });
 
 app.post("/random", (req, res) => {
@@ -132,5 +138,5 @@ app.listen(3004, () => {
   new Logger().new(imports);
   new Logger().log(`Node app is running on http://localhost:${3004}.`);
   new Logger().log("*".repeat(140));
-  new Node().getUserInput();
+  // new Node().getUserInput();
 });

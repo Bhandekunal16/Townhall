@@ -2,6 +2,7 @@ const { MongoClient } = require("mongodb");
 const fs = require("fs");
 const path = require("path");
 const csv = require("csv-parser");
+const { all } = require("axios");
 
 class MongoPlants {
   constructor() {
@@ -90,6 +91,19 @@ class MongoPlants {
     console.log("MongoDB connection closed");
   }
 
+  async getAllDocuments() {
+    try {
+      await this.client.connect();
+      const database = this.client.db(this.dbName);
+      const collection = database.collection("Nomenclature");
+      const cursor = collection.find().limit(1000);
+      console.log(cursor);
+      return await cursor.toArray();
+    } catch (error) {
+      return error;
+    }
+  }
+
   async getCountOfDocuments() {
     const client = new MongoClient(this.uri, {
       useNewUrlParser: true,
@@ -97,10 +111,10 @@ class MongoPlants {
     });
 
     try {
-      await client.connect();
+      await this.client.connect();
       console.log("Connected to MongoDB");
 
-      const database = client.db(this.dbName);
+      const database = this.client.db(this.dbName);
       const collection = database.collection("Nomenclature");
 
       // Get count of documents in the collection
@@ -113,26 +127,6 @@ class MongoPlants {
       console.error("Error:", error);
     }
   }
-
-  async getAllDocuments() {
-    try {
-      await client.connect();
-      const database = client.db(this.dbName);
-      const collection = database.collection("Nomenclature");
-      const cursor = collection.find();
-      const allDocuments = await cursor.toArray();
-      return {
-        data: allDocuments,
-        msg: "success",
-        status: true,
-        statusCode: 200,
-      };
-    } catch (error) {
-      return error;
-    }
-  }
 }
 
 module.exports = MongoPlants;
-
-new MongoPlants().read();
