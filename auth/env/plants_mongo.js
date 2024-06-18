@@ -70,9 +70,11 @@ class MongoPlants {
       const db = this.client.db(this.dbName);
       const collection = db.collection(this.collection);
 
-      await collection.insertMany(array, { session });
+      await Promise.all([
+        collection.insertMany(array, { session }),
+        session.commitTransaction(),
+      ]);
 
-      await session.commitTransaction();
       new Logger().log("Transaction committed successfully");
     } catch (error) {
       await session.abortTransaction();
