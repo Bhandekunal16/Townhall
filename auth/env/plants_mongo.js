@@ -19,6 +19,7 @@ class MongoPlants {
 
   read() {
     const [results, array, batchSize] = [[], [], 500];
+
     fs.createReadStream(path.join(__dirname, "../../assets/classification.csv"))
       .pipe(csv())
       .on("data", (data) => {
