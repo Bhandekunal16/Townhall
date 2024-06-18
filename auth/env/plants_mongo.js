@@ -73,10 +73,10 @@ class MongoPlants {
       await collection.insertMany(array, { session });
 
       await session.commitTransaction();
-      console.log("Transaction committed successfully");
+      new Logger().log("Transaction committed successfully");
     } catch (error) {
       await session.abortTransaction();
-      console.error("Error processing index ", error);
+      new Logger().error(error);
     } finally {
       session.endSession();
     }
