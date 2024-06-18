@@ -19,14 +19,14 @@ class MongoPlants {
 
   read() {
     const results = [];
+    const array = [];
+    const batchSize = 500;
     fs.createReadStream(path.join(__dirname, "../../assets/classification.csv"))
       .pipe(csv())
       .on("data", (data) => {
         results.push(data);
       })
       .on("end", async () => {
-        const array = [];
-        const batchSize = 500;
         for (let index = 0; index < results.length; index++) {
           const element =
             results[index][
@@ -45,7 +45,6 @@ class MongoPlants {
         for (let i = 0; i < array.length; i += batchSize) {
           const batch = array.slice(i, i + batchSize);
           await this.write(batch);
-
           new Logger().log(
             `Processed batch ${i / batchSize + 1} of ${Math.ceil(
               results.length / batchSize
