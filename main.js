@@ -24,7 +24,7 @@ const [
   require("robotic.js/src/class/uuid"),
   require("./src/stringSort"),
   require("./src/binaryEncrypted"),
-  // require("robotic.js/src/class/dataGenerate"),
+  require("robotic.js/src/class/dataGenerate"),
   require("robotic.js/src/module/index"),
   require("./auth/env/authorized"),
   require("robotic.js/src/class/response"),
