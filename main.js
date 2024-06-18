@@ -136,7 +136,7 @@ imports = [...imports, ...elements1];
 app.listen(3004, () => {
   new Logger().log("*".repeat(140));
   new Logger().new(imports);
+  new Logger().log(new MongoPlants().connect());
   new Logger().log(`Node app is running on http://localhost:${3004}.`);
   new Logger().log("*".repeat(140));
-  // new Node().getUserInput();
 });
