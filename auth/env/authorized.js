@@ -124,7 +124,7 @@ class Authorized {
 
   async NpmViewV2(name) {
     try {
-      const response = await fetch(
+      const response = await axios.get(
         `https://npm-trends-proxy.uidotdev.workers.dev/npm/registry/${name}`
       );
       return response.data.name !== undefined
