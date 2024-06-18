@@ -19,7 +19,9 @@ class MongoPlants {
   read() {
     const [results, array, batchSize] = [[], [], 500];
 
-    fs.createReadStream(path.join(__dirname, "../../assets/classification.csv"))
+    fs.createReadStream(
+      path.join(__dirname, "../../../assets/classification.csv")
+    )
       .pipe(csv())
       .on("data", (data) => {
         results.push(data);
@@ -35,7 +37,7 @@ class MongoPlants {
             subfamily: element.split("\t")[8],
             genus: element.split("\t")[11],
             subgenus: element.split("\t")[12],
-            scientfiicname: element.split("\t")[3],
+            scientfiicname: element.split("\t")[3].replace(/^"|"$/g, ""),
             tribe: element.split("\t")[9],
           });
         }
@@ -144,12 +146,24 @@ class MongoPlants {
       await this.client.connect();
       const db = this.client.db(this.dbName);
       const collection = db.collection(this.collection);
-      const query = collection.find({ scientfiicname: `"${input}"` });
+      const query = collection.find({ scientfiicname: input });
       return new response().success(await query.toArray());
     } catch (error) {
       return new response().error(error);
     }
   }
+
+  async findDuplicate() {
+    await this.client.connect();
+    const db = this.client.db(this.dbName);
+    const collection = db.collection(this.collection);
+    const array = await collection.find().toArray();
+
+    array.map((ele) => {
+      console.log(ele.scientfiicname.replace(/^"|"$/g, ""));
+    });
+  }
 }
 
 module.exports = MongoPlants;
+
