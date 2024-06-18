@@ -45,7 +45,7 @@ class MongoPlants {
           const batch = array.slice(i, i + batchSize);
           await this.write(batch);
 
-          console.log(
+          new Logger().log(
             `Processed batch ${i / batchSize + 1} of ${Math.ceil(
               results.length / batchSize
             )}`
