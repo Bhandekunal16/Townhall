@@ -22,13 +22,13 @@ class MongoPlants {
         results.push(data);
       })
       .on("end", async () => {
-        let array = [];
+        const array = [];
+        const batchSize = 500;
         for (let index = 0; index < results.length; index++) {
           const element =
             results[index][
               "taxonID\tscientificNameID\tlocalID\tscientificName\ttaxonRank\tparentNameUsageID\tscientificNameAuthorship\tfamily\tsubfamily\ttribe\tsubtribe\tgenus\tsubgenus\tspecificEpithet\tinfraspecificEpithet\tverbatimTaxonRank\tnomenclaturalStatus\tnamePublishedIn\ttaxonomicStatus\tacceptedNameUsageID\toriginalNameUsageID\tnameAccordingToID\ttaxonRemarks\tcreated\tmodified\treferences\tsource\tmajorGroup\ttplID"
             ];
-
           array.push({
             family: element.split("\t")[7],
             subfamily: element.split("\t")[8],
@@ -38,8 +38,6 @@ class MongoPlants {
             tribe: element.split("\t")[9],
           });
         }
-
-        const batchSize = 500;
 
         for (let i = 0; i < array.length; i += batchSize) {
           const batch = array.slice(i, i + batchSize);
