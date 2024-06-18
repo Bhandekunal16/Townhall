@@ -145,7 +145,8 @@ class MongoPlants {
       const db = this.client.db(this.dbName);
       const collection = db.collection(this.collection);
 
-      const query = collection.find({ scientfiicname: input });
+      const query = collection.find({ scientfiicname: `"${input}"` });
+      console.log(await query);
       return new response().success(await query.toArray());
     } catch (error) {
       return new response().error(error);
