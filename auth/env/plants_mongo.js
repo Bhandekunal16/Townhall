@@ -101,10 +101,6 @@ class MongoPlants {
   }
 
   async getCountOfDocuments() {
-    const client = new MongoClient(this.uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
     try {
       await this.client.connect();
       const database = this.client.db(this.dbName);
