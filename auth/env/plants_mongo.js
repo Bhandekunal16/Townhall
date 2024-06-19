@@ -133,10 +133,7 @@ class MongoPlants {
 
   async getCollectionByGenusName(input) {
     try {
-      await this.client.connect();
-      const db = this.client.db(this.dbName);
-      const collection = db.collection(this.collection);
-
+      const collection = await this.connectLine()
       const query = collection.find({ genus: input });
       return new response().success(await query.toArray());
     } catch (error) {
