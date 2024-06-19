@@ -63,14 +63,19 @@ class MongoPlants {
     }
   }
 
+  async connectLine() {
+    await this.client.connect();
+    const db = this.client.db(this.dbName);
+    return db.collection(this.collection);
+  }
+
   async write(array) {
     const session = this.client.startSession();
     session.startTransaction();
     new Logger().log(array.length);
 
     try {
-      const db = this.client.db(this.dbName);
-      const collection = db.collection(this.collection);
+      collection = await this.connectLine();
 
       await Promise.all([
         collection.insertMany(array, { session }),
@@ -93,10 +98,8 @@ class MongoPlants {
 
   async getAllDocuments() {
     try {
-      await this.client.connect();
-      const database = this.client.db(this.dbName);
-      const res = database.collection(this.collection);
-      const cursor = res.find().limit(1000);
+      collection = await this.connectLine();
+      const cursor = collection.find().limit(1000);
       return new response().success(await cursor.toArray());
     } catch (error) {
       return new response().error(error);
@@ -105,9 +108,7 @@ class MongoPlants {
 
   async getCountOfDocuments() {
     try {
-      await this.client.connect();
-      const database = this.client.db(this.dbName);
-      const collection = database.collection(this.collection);
+      collection = await this.connectLine();
       const count = await collection.countDocuments();
       return new response().success(count);
     } catch (error) {
@@ -117,10 +118,7 @@ class MongoPlants {
 
   async getNameByProperty(input) {
     try {
-      await this.client.connect();
-      const db = this.client.db(this.dbName);
-      const collection = db.collection(this.collection);
-
+      collection = await this.connectLine();
       const query = collection.find({ family: input });
       return new response().success(await query.toArray());
     } catch (error) {
@@ -143,9 +141,7 @@ class MongoPlants {
 
   async getCollectionByScientificName(input) {
     try {
-      await this.client.connect();
-      const db = this.client.db(this.dbName);
-      const collection = db.collection(this.collection);
+      collection = await this.connectLine();
       const query = collection.find({ scientfiicname: input });
       return new response().success(await query.toArray());
     } catch (error) {
@@ -153,17 +149,17 @@ class MongoPlants {
     }
   }
 
-  async findDuplicate() {
-    await this.client.connect();
-    const db = this.client.db(this.dbName);
-    const collection = db.collection(this.collection);
-    const array = await collection.find().toArray();
+  async edit() {
+    collection = await this.connectLine();
+    await collection.updateOne(
+      { scientfiicname: input },
+      {
+        $set: body,
+      }
+    );
 
-    array.map((ele) => {
-      console.log(ele.scientfiicname.replace(/^"|"$/g, ""));
-    });
+    return new response().success("updated successfully!");
   }
 }
 
 module.exports = MongoPlants;
-
