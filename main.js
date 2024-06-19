@@ -129,6 +129,10 @@ app.post("/plant/getCollectionByScientificName", async (req, res) => {
   );
 });
 
+app.post("/plant/edit", async (req, res) => {
+  res.send(await new MongoPlants().edit(req.body));
+});
+
 const routes = [
   Color,
   Logger,

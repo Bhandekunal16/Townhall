@@ -149,10 +149,10 @@ class MongoPlants {
     }
   }
 
-  async edit() {
+  async edit(body) {
     collection = await this.connectLine();
     await collection.updateOne(
-      { scientfiicname: input },
+      { scientfiicname: body.scientfiicname },
       {
         $set: body,
       }
