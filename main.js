@@ -36,6 +36,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(exteroceptor);
+const preferredPort = 3000;
+const fallbackPort = 3004;
 
 app.get("/", (req, res) => {
   res.send("hello world");
@@ -152,10 +154,30 @@ const elements1 = new Node().output();
 
 imports = [...imports, ...elements1];
 
-app.listen(3004, async () => {
-  new Logger().log("*".repeat(140));
-  new Logger().new(imports);
-  await new MongoPlants().connect();
-  new Logger().log(`Node app is running on http://localhost:${3004}.`);
-  new Logger().log("*".repeat(140));
-});
+const startServer = (port) => {
+  const server = app.listen(port, async () => {
+    new Logger().log("*".repeat(140));
+    new Logger().new(imports);
+    await new MongoPlants().connect();
+    new Logger().log(`Node app is running on http://localhost:${port}.`);
+    new Logger().log("*".repeat(140));
+  });
+
+  server.on("error", (err) => {
+    if (err.code === "EADDRINUSE") {
+      console.error(
+        `Port ${port} is in use, trying fallback port ${fallbackPort}`
+      );
+      if (port !== fallbackPort) {
+        startServer(fallbackPort);
+      } else {
+        console.error(`Fallback port ${fallbackPort} is also in use. Exiting.`);
+        process.exit(1);
+      }
+    } else {
+      console.error(`Server error: ${err}`);
+    }
+  });
+};
+
+startServer(preferredPort);
