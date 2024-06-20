@@ -103,7 +103,7 @@ class MongoPlants {
   async getAllDocuments() {
     try {
       const collection = await this.connectLine();
-      const cursor = collection.find().limit(1000);
+      const cursor = collection.find().limit(10);
       return new response().success(await cursor.toArray());
     } catch (error) {
       return new response().error(error);
