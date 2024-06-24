@@ -14,6 +14,7 @@ const [
   Response,
   exteroceptor,
   MongoPlants,
+  Router,
 ] = [
   require("express"),
   require("cors"),
@@ -30,6 +31,7 @@ const [
   require("robotic.js/src/class/response"),
   require("./exteroceptor"),
   require("./auth/env/plants_mongo"),
+  require("./router"),
 ];
 
 const app = express();
@@ -39,49 +41,49 @@ app.use(exteroceptor);
 const preferredPort = 3000;
 const fallbackPort = 3004;
 
-app.get("/", (req, res) => {
+app.get(new Router().routes[0], (req, res) => {
   res.send("hello world");
 });
 
-app.get("/create/otp", (req, res) => {
+app.get(new Router().routes[1], (req, res) => {
   res.send(`${new OtpCrater().new()}`);
 });
 
-app.get("/create/uuid", (req, res) => {
+app.get(new Router().routes[2], (req, res) => {
   res.send(new Uuid().vectorized());
 });
 
-app.get("/plants/species", async (req, res) => {
+app.get(new Router().routes[3], async (req, res) => {
   res.send(await new MongoPlants().getAllDocuments());
 });
 
-app.post("/random", (req, res) => {
+app.post(new Router().routes[4], (req, res) => {
   res.send(new DataGenerator().create(req.body.length, req.body.type));
 });
 
-app.post("/ifsc", async (req, res) => {
+app.post(new Router().routes[5], async (req, res) => {
   res.send(await new Authorized().main(req.body.ifsc));
 });
 
-app.post("/pincode", async (req, res) => {
+app.post(new Router().routes[6], async (req, res) => {
   res.send(await new Authorized().postal(req.body.pinCode));
 });
 
-app.post("/v2/npm/view", async (req, res) => {
+app.post(new Router().routes[7], async (req, res) => {
   res.send(await new Authorized().NpmViewV2(req.body.name));
 });
 
-app.post("/search", async (req, res) => {
+app.post(new Router().routes[8], async (req, res) => {
   res.send(await new Authorized().NpmSearch(req.body.name));
 });
 
-app.post("/npm/view", async (req, res) => {
+app.post(new Router().routes[9], async (req, res) => {
   res.send(
     await new Authorized().NpmView(req.body.userName, req.body.packageName)
   );
 });
 
-app.post("/sort/string", async (req, res) => {
+app.post(new Router().routes[10], async (req, res) => {
   const requestData = req.body;
   const query = await new SortService().write(
     requestData.data,
@@ -90,7 +92,7 @@ app.post("/sort/string", async (req, res) => {
   res.send({ data: query.value, msg: `${query.status}`, status: query.status });
 });
 
-app.post("/store", (req, res) => {
+app.post(new Router().routes[11], (req, res) => {
   const [requestData, header] = [req.body, req.hostname];
   const query = new BinaryLocker().createBinaryFile(
     requestData.data,
@@ -100,7 +102,7 @@ app.post("/store", (req, res) => {
   res.send({ data: query, msg: "success", status: true });
 });
 
-app.post("/info", async (req, res) => {
+app.post(new Router().routes[12], async (req, res) => {
   const query = await new Authorized()
     .getPackageInfo(req.body.name)
     .then((packageInfo) => {
@@ -117,23 +119,23 @@ app.post("/info", async (req, res) => {
   );
 });
 
-app.post("/plant/getByFamilyName", async (req, res) => {
+app.post(new Router().routes[13], async (req, res) => {
   res.send(await new MongoPlants().getNameByProperty(req.body.name));
 });
 
-app.post("/plant/getCollectionByGenusName", async (req, res) => {
+app.post(new Router().routes[14], async (req, res) => {
   res.send(await new MongoPlants().getCollectionByGenusName(req.body.name));
 });
 
-app.post("/plant/getCollectionByScientificName", async (req, res) => {
+app.post(new Router().routes[15], async (req, res) => {
   res.send(
     await new MongoPlants().getCollectionByScientificName(req.body.name)
   );
 });
 
-app.post("/plant/edit", async (req, res) => {
+app.post(new Router().routes[16], async (req, res) => {
   res.send(await new MongoPlants().edit(req.body));
-});
+});p
 
 const routes = [
   Color,
@@ -158,6 +160,7 @@ const startServer = (port) => {
   const server = app.listen(port, async () => {
     new Logger().log("*".repeat(140));
     new Logger().new(imports);
+    new Logger().array(new Router().routes);
     await new MongoPlants().connect();
     new Logger().log(`Node app is running on http://localhost:${port}.`);
     new Logger().log("*".repeat(140));
