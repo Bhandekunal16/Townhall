@@ -22,6 +22,6 @@
     "robotic-env-reader": "^1.0.0",
     "robotic.js": "^1.4.8",
     "roboticdb": "^1.1.4",
-    "vercel": "^32.3.0"
+    "vercel": "^34.2.7"
   }
 }
