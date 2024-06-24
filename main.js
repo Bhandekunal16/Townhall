@@ -171,15 +171,8 @@ const startServer = (port) => {
       console.error(
         `Port ${port} is in use, trying fallback port ${fallbackPort}`
       );
-      if (port !== fallbackPort) {
-        startServer(fallbackPort);
-      } else {
-        console.error(`Fallback port ${fallbackPort} is also in use. Exiting.`);
-        process.exit(1);
-      }
-    } else {
-      console.error(`Server error: ${err}`);
-    }
+      port !== fallbackPort ? startServer(fallbackPort) : process.exit(1);
+    } else console.error(`Server error: ${err}`);
   });
 };
 
