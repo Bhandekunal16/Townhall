@@ -135,7 +135,7 @@ app.post(new Router().routes[15], async (req, res) => {
 
 app.post(new Router().routes[16], async (req, res) => {
   res.send(await new MongoPlants().edit(req.body));
-});p
+});
 
 const routes = [
   Color,
