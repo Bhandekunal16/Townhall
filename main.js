@@ -137,6 +137,10 @@ app.post(new Router().routes[16], async (req, res) => {
   res.send(await new MongoPlants().edit(req.body));
 });
 
+app.post(new Router().routes[17], async (req, res) => {
+  res.send(await new Authorized().encrypt(req.body));
+});
+
 const routes = [
   Color,
   Logger,
