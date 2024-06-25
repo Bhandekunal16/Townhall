@@ -141,6 +141,10 @@ app.post(new Router().routes[17], async (req, res) => {
   res.send(await new Authorized().encrypt(req.body));
 });
 
+app.post(new Router().routes[18], async (req, res) => {
+  res.send(await new Authorized().decrypt(req.body));
+});
+
 const routes = [
   Color,
   Logger,

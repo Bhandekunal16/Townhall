@@ -157,6 +157,29 @@ class Authorized {
     const resData = await response.json();
     return resData;
   }
+
+  async decrypt(data) {
+    const response = await fetch(
+      `https://encryption-server.vercel.app/decrypt`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          publicKey: "plantee",
+          data: data,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const resData = await response.json();
+    return resData;
+  }
 }
 
 module.exports = Authorized;

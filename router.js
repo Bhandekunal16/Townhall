@@ -17,7 +17,8 @@ class Router {
     "/plant/getCollectionByGenusName",
     "/plant/getCollectionByScientificName",
     "/plant/edit",
-    '/encryption'
+    "/encryption",
+    "decryption",
   ];
 }
 
