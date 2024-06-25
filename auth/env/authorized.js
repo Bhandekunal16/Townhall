@@ -168,7 +168,7 @@ class Authorized {
         },
         body: JSON.stringify({
           publicKey: "plantee",
-          data: data,
+          data: data.data,
         }),
       }
     );
