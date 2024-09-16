@@ -83,10 +83,7 @@ class Authorized {
     try {
       const response = await fetch(`https://registry.npmjs.org/${packageName}`);
       if (!response.ok) throw new Error(response.status);
-      else {
-        const data = await response.json();
-        return data;
-      }
+      else return await response.json();
     } catch (error) {
       return new Response().error(error);
     }
@@ -149,13 +146,8 @@ class Authorized {
         }),
       }
     );
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const resData = await response.json();
-    return resData;
+    if (!response.ok) throw new Error("Network response was not ok");
+    return await response.json();
   }
 
   async decrypt(data) {
@@ -172,13 +164,8 @@ class Authorized {
         }),
       }
     );
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const resData = await response.json();
-    return resData;
+    if (!response.ok) throw new Error("Network response was not ok");
+    return await response.json();
   }
 }
 
