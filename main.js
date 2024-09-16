@@ -15,6 +15,7 @@ const [
   exteroceptor,
   MongoPlants,
   Router,
+  cluster,
 ] = [
   require("express"),
   require("cors"),
@@ -32,6 +33,7 @@ const [
   require("./exteroceptor"),
   require("./auth/env/plants_mongo"),
   require("./router"),
+  require("cluster"),
 ];
 
 const app = express();
@@ -174,14 +176,25 @@ const startServer = (port) => {
     new Logger().log("*".repeat(140));
   });
 
-  server.on("error", (err) => {
-    if (err.code === "EADDRINUSE") {
-      console.error(
-        `Port ${port} is in use, trying fallback port ${fallbackPort}`
-      );
-      port !== fallbackPort ? startServer(fallbackPort) : process.exit(1);
-    } else console.error(`Server error: ${err}`);
-  });
+  if (cluster.isMaster) {
+    const numCPUs = require("os").cpus().length;
+    for (let i = 0; i < numCPUs; i++) {
+      cluster.fork();
+    }
+    cluster.on("exit", (worker, code, signal) => {
+      console.log(`Worker ${worker.process.pid} died. Forking a new worker...`);
+      cluster.fork();
+    });
+  } else {
+    server.on("error", (err) => {
+      if (err.code === "EADDRINUSE") {
+        console.error(
+          `Port ${port} is in use, trying fallback port ${fallbackPort}`
+        );
+        port !== fallbackPort ? startServer(fallbackPort) : process.exit(1);
+      } else console.error(`Server error: ${err}`);
+    });
+  }
 };
 
 startServer(preferredPort);
